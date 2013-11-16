@@ -1,10 +1,5 @@
 package org.cognoscenti.stocks.web;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.cognoscenti.stocks.model.HistoricalCompanyStockInfo;
-import org.cognoscenti.stocks.model.HistoricalCompanyStockInfoRecord;
 import org.cognoscenti.stocks.model.StockRecord;
 import org.cognoscenti.stocks.model.Stocks;
 import org.cognoscenti.stocks.util.StocksUtil;

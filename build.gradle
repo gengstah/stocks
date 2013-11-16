@@ -1,6 +1,7 @@
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'jetty'
+apply plugin: 'maven'
 
 buildscript {
 	repositories {
@@ -57,6 +58,21 @@ task initProject () << {
 	project.sourceSets*.allSource.srcDirTrees.flatten().dir.each { dir ->
 		dir.mkdirs()
 	}
+}
+
+task writePom << {
+    pom {
+        project {
+            inceptionYear '2013'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+        }
+    }.writeTo("$buildDir/pom.xml")
 }
 
 jettyRun {
