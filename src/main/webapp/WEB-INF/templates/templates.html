@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="/css/style.css" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div id="header" th:fragment="header">
+		<div>
+			<div class="logo">
+				<a href="index.html" th:href="@{/}" th:text="#{company.name}">Cognoscenti</a>
+			</div>
+			<ul id="navigation">
+				<li class="active">
+					<a href="index.html" th:href="@{/}" th:text="#{home.text}">Home</a>
+				</li>
+				<li>
+					<a href="features.html" th:href="@{/intraday/}" th:text="#{intraday.text}">Intraday</a>
+				</li>
+				<li>
+					<a href="news.html" th:href="@{/historical/}" th:text="#{historical.text}">Historical</a>
+				</li>
+				<li>
+					<a href="about.html" th:href="@{/realtime/}" th:text="#{realtime.text}">Realtime</a>
+				</li>
+				<li>
+					<a href="contact.html" th:href="@{/contact/}" th:text="#{contact.text}">Contact</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div th:fragment="footer">
+		<div class="clearfix">
+			<div id="connect">
+				<a href="http://www.facebook.com/gengstah" target="_blank" class="facebook"></a><a href="#" target="_blank" class="googleplus"></a><a href="#" target="_blank" class="twitter"></a><a href="#" target="_blank" class="tumbler"></a>
+			</div>
+			<p th:text="#{copyright.text}">
+				&copy; 2013 Cognoscenti. All Rights Reserved.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

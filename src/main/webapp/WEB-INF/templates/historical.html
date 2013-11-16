@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Getting Started: Serving Web Content</title> 
+    <title th:text="#{webapp.title}">Webapp ni Geng</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     
+    <link rel="stylesheet" href="/css/style.css" type="text/css" th:href="@{/css/style.css}" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script th:inline="javascript">
 		$(function() {
@@ -360,17 +361,52 @@
 			$('input#symbol').live('keypress',function(e){
 				var p = e.which;
 				if(p == 13){
-					window.location = 'index.html?symbol=' + $('input#symbol').val();
+					window.location = 'home.html?symbol=' + $('input#symbol').val();
 				}
 			});
+			
+			$('a#quote').click(function() {
+				window.location = 'home.html?symbol=' + $('input#symbol').val();
+			});
+			
 		});
 	</script>
 </head>
 <body onload="$('input#symbol').focus();">
+
+	<div id="header" th:include="templates :: header"></div>
+	
 	<script src="http://code.highcharts.com/stock/highstock.js"></script>
 	<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-	<input type="text" id="symbol" name="symbol" value="TextValue" th:attr="value=${symbol}" />
-    <div th:if="${#strings.isEmpty(symbol) == false}" id="basic-line-container" style="height: 500px; min-width: 500px"></div>
-    <div th:if="${#strings.isEmpty(symbol) == false}" id="candlestick-volume-container" style="height: 500px; min-width: 500px"></div>
+	
+	<div id="contentsHistoricalSymbolSearch">
+		<div id="taglineHistorical" class="clearfix">
+			<h1>Stocks. Stocks. Stocks.</h1>
+			<div>
+				<p>
+					<input type="text" id="symbol" name="symbol" class="message" value="TextValue" th:attr="value=${symbol}" />
+					<span><a id="quote" href="#" class="more" th:text="#{historical.button.text}">Quote Button</a></span>
+				</p>
+			</div>
+			<div>
+				<p>
+					Type &quot;GLO&quot; in the textbox then press Enter to try it out
+				</p>
+				<p>
+					The chart in the left is called single line series. It represents the price of stock over time.
+				</p>
+				<p>
+					The chart on the right is called candlestick. It represents OHLC and volume of a stock over time.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div id="contentsHistorical">
+		<div id="taglineHistorical" class="clearfix">
+    		<div th:if="${#strings.isEmpty(symbol) == false}" id="basic-line-container" style="height: 500px; min-width: 500px"></div>
+    		<div th:if="${#strings.isEmpty(symbol) == false}" id="candlestick-volume-container" style="height: 500px; min-width: 500px"></div>
+    	</div>
+    </div>
+    <div id="footer" th:include="templates :: footer"></div>
 </body>
 </html>

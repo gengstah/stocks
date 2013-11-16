@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:jdbc-prod.properties")
+@PropertySource("classpath:jdbc.properties")
 public class OrmConfig {
 	
 	@Inject	private Environment env;

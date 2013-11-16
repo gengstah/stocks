@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/historical")
 public class HistoricalCompanyStockInfoRecordController {
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = { "/home", "/" }, method = RequestMethod.GET)
 	public String historical(@RequestParam(value="symbol", required=false, defaultValue="") String symbol, Model model) {
 		
 		Stocks stocks = StocksUtil.getInstance().findSecurityOrCompany(symbol);
