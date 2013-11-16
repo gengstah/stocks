@@ -78,3 +78,10 @@ task writePom << {
 jettyRun {
     contextPath = "/"
 }
+
+jettyRunWar.contextPath = ''
+
+war{
+	archiveName = 'ROOT.war'
+	destinationDir = file('webapps')
+}
