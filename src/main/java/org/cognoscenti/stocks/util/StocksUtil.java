@@ -47,6 +47,8 @@ public class StocksUtil {
 	
 	public String createBasicLineData(String securityId) {
 		
+		if("null".equals(securityId)) return "[]";
+		
 		HistoricalCompanyStockInfo historicalStockInfo = getCompanyInfoHistoricalData(securityId);
 		List<HistoricalCompanyStockInfoRecord> records = historicalStockInfo.getRecords();
 		Collections.reverse(records);

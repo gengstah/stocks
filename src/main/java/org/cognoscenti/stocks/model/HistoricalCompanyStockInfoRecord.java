@@ -35,34 +35,34 @@ public class HistoricalCompanyStockInfoRecord {
 	private Long id;
 	
 	@JsonProperty("sqLow")
-	private Integer sqLow;
+	private Double sqLow;
 	
 	@JsonProperty("sqOpen")
-	private Integer sqOpen;
+	private Double sqOpen;
 	
 	@JsonProperty("sqHigh")
-	private Integer sqHigh;
+	private Double sqHigh;
 	
 	@JsonProperty("percChangeClose")
 	private Double percChangeClose;
 	
 	@JsonProperty("sqClose")
-	private Integer sqClose;
+	private Double sqClose;
 	
 	@JsonProperty("secQid")
 	private String secQid;
 	
 	@JsonProperty("changeClose")
-	private Integer changeClose;
+	private Double changeClose;
 	
 	@JsonProperty("totalValue")
 	private Double totalValue;
 	
 	@JsonProperty("totalVolume")
-	private Integer totalVolume;
+	private Long totalVolume;
 	
 	@JsonProperty("lastTradePrice")
-	private Integer lastTradePrice;
+	private Double lastTradePrice;
 	
 	@JsonProperty("avgPrice")
 	private Double avgPrice;
@@ -72,7 +72,7 @@ public class HistoricalCompanyStockInfoRecord {
 	private Date tradingDate;
 	
 	@JsonProperty("sqPrevious")
-	private Integer sqPrevious;
+	private Double sqPrevious;
 
 	/**
 	 * @return the id
@@ -89,32 +89,32 @@ public class HistoricalCompanyStockInfoRecord {
 	}
 
 	@JsonProperty("sqLow")
-	public Integer getSqLow() {
+	public Double getSqLow() {
 		return sqLow;
 	}
 
 	@JsonProperty("sqLow")
-	public void setSqLow(Integer sqLow) {
+	public void setSqLow(Double sqLow) {
 		this.sqLow = sqLow;
 	}
 
 	@JsonProperty("sqOpen")
-	public Integer getSqOpen() {
+	public Double getSqOpen() {
 		return sqOpen;
 	}
 
 	@JsonProperty("sqOpen")
-	public void setSqOpen(Integer sqOpen) {
+	public void setSqOpen(Double sqOpen) {
 		this.sqOpen = sqOpen;
 	}
 
 	@JsonProperty("sqHigh")
-	public Integer getSqHigh() {
+	public Double getSqHigh() {
 		return sqHigh;
 	}
 
 	@JsonProperty("sqHigh")
-	public void setSqHigh(Integer sqHigh) {
+	public void setSqHigh(Double sqHigh) {
 		this.sqHigh = sqHigh;
 	}
 
@@ -129,12 +129,12 @@ public class HistoricalCompanyStockInfoRecord {
 	}
 
 	@JsonProperty("sqClose")
-	public Integer getSqClose() {
+	public Double getSqClose() {
 		return sqClose;
 	}
 
 	@JsonProperty("sqClose")
-	public void setSqClose(Integer sqClose) {
+	public void setSqClose(Double sqClose) {
 		this.sqClose = sqClose;
 	}
 
@@ -149,12 +149,12 @@ public class HistoricalCompanyStockInfoRecord {
 	}
 
 	@JsonProperty("changeClose")
-	public Integer getChangeClose() {
+	public Double getChangeClose() {
 		return changeClose;
 	}
 
 	@JsonProperty("changeClose")
-	public void setChangeClose(Integer changeClose) {
+	public void setChangeClose(Double changeClose) {
 		this.changeClose = changeClose;
 	}
 
@@ -169,22 +169,22 @@ public class HistoricalCompanyStockInfoRecord {
 	}
 
 	@JsonProperty("totalVolume")
-	public Integer getTotalVolume() {
+	public Long getTotalVolume() {
 		return totalVolume;
 	}
 
 	@JsonProperty("totalVolume")
-	public void setTotalVolume(Integer totalVolume) {
+	public void setTotalVolume(Long totalVolume) {
 		this.totalVolume = totalVolume;
 	}
 
 	@JsonProperty("lastTradePrice")
-	public Integer getLastTradePrice() {
+	public Double getLastTradePrice() {
 		return lastTradePrice;
 	}
 
 	@JsonProperty("lastTradePrice")
-	public void setLastTradePrice(Integer lastTradePrice) {
+	public void setLastTradePrice(Double lastTradePrice) {
 		this.lastTradePrice = lastTradePrice;
 	}
 
@@ -211,12 +211,12 @@ public class HistoricalCompanyStockInfoRecord {
 	}
 
 	@JsonProperty("sqPrevious")
-	public Integer getSqPrevious() {
+	public Double getSqPrevious() {
 		return sqPrevious;
 	}
 
 	@JsonProperty("sqPrevious")
-	public void setSqPrevious(Integer sqPrevious) {
+	public void setSqPrevious(Double sqPrevious) {
 		this.sqPrevious = sqPrevious;
 	}
 
