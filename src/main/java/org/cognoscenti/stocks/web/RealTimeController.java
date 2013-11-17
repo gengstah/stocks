@@ -11,34 +11,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/historical")
-public class HistoricalCompanyStockInfoRecordController {
+@RequestMapping("/realtime")
+public class RealTimeController {
 	
 	@RequestMapping(value = { "/home", "/" }, method = RequestMethod.GET)
-	public String historical(@RequestParam(value="symbol", required=false, defaultValue="") String symbol, Model model) {
+	public String realtime(@RequestParam(value="symbol", required=false, defaultValue="") String symbol, Model model) {
 		
 		Stocks stocks = StocksUtil.getInstance().findSecurityOrCompany(symbol);
-		if(stocks.getStockRecords().size() == 0) { 
+		
+		if(stocks.getStockRecords().size() == 0) {
 			model.addAttribute("symbol", "");
 			model.addAttribute("stockRecord", new StockRecord());
-			return "historical";
+			return "realtime";
 		}
 		
 		StockRecord stockRecord = stocks.getStockRecords().get(0);
 		model.addAttribute("stockRecord", stockRecord);
 		model.addAttribute("symbol", symbol);
 		
-		return "historical";
-	}
-
-	@RequestMapping(value = "/basicLineData", method = RequestMethod.GET)
-	public @ResponseBody String fetchBasicLineData(@RequestParam(value="securityId", required=false, defaultValue="101") String securityId) {		
-		return StocksUtil.getInstance().createBasicLineData(securityId);
+		return "realtime";
 	}
 	
-	@RequestMapping(value = "/candleStickAndVolumeData", method = RequestMethod.GET)
-	public @ResponseBody String fetchCandleStickAndVolumeData(@RequestParam(value="securityId", required=false, defaultValue="101") String securityId) {		
-		return StocksUtil.getInstance().createCandleStickAndVolumeData(securityId);
+	@RequestMapping(value = "/realTimeData", method = RequestMethod.GET)
+	public @ResponseBody String fetchRealTimeData(@RequestParam(value="symbol", required=false, defaultValue="BPI") String symbol) {		
+		return StocksUtil.getInstance().createRealTimeData(symbol);
 	}
 	
 }

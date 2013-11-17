@@ -8,102 +8,89 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script th:inline="javascript">
 		$(function() {
-			/*<![CDATA[*/
-			$.getJSON(/*[['basicLineData.html?securityId=' + ${stockRecord.securityId}]]*/ 'http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
-			/*]]>*/
-				$('#basic-line-container').highcharts('StockChart', {
-					rangeSelector : {
-						selected : 5
-					},
-		
-					title : {
-						text : /*[[${stockRecord.listedCompanyName}]]*/ 'Apple',
-					},
-					
-					series : [{
-						name : /*[[${stockRecord.symbol}]]*/ 'AAPL',
-						data : data,
-						tooltip: {
-							valueDecimals: 2
-						}
-					}]
-				});
+			Highcharts.setOptions({
+				global : {
+					useUTC : false
+				}
 			});
 			
-			/*<![CDATA[*/
-			$.getJSON(/*[['candleStickAndVolumeData.html?securityId=' + ${stockRecord.securityId}]]*/ 'http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {
-			/*]]>*/
-				var ohlc = [],
-					volume = [],
-					dataLength = data.length;
-				/*<![CDATA[*/
-				for (i = 0; i < dataLength; i++) {
-					ohlc.push([
-						data[i][0],
-						data[i][1],
-						data[i][2],
-						data[i][3],
-						data[i][4]
-					]);
-					
-					volume.push([
-						data[i][0],
-						data[i][5]
-					])
-				}
-				/*]]>*/
-				var groupingUnits = [[
-					'week',
-					[1]
-				], [
-					'month',
-					[1, 2, 3, 4, 6]
-				]];
+			$('#realtime-container').highcharts('StockChart', {
+				chart : {
+					events : {
+						load : function() {
 
-				$('#candlestick-volume-container').highcharts('StockChart', {
-				    
-				    rangeSelector: {
-				        selected: 5
-				    },
-
-				    title: {
-				        text: /*[[${stockRecord.symbol} + ' Historical']]*/ 'AAPL Historical',
-				    },
-
-				    yAxis: [{
-				        title: {
-				            text: 'OHLC'
-				        },
-				        height: 200,
-				        lineWidth: 2
-				    }, {
-				        title: {
-				            text: 'Volume'
-				        },
-				        top: 300,
-				        height: 100,
-				        offset: 0,
-				        lineWidth: 2
-				    }],
-				    
-				    series: [{
-				        type: 'candlestick',
-				        name: /*[[${stockRecord.symbol}]]*/ 'AAPL',
-				        data: ohlc,
-				        dataGrouping: {
-							units: groupingUnits
-				        }
-				    }, {
-				        type: 'column',
-				        name: 'Volume',
-				        data: volume,
-				        yAxis: 1,
-				        dataGrouping: {
-							units: groupingUnits
-				        }
-				    }]
-				});
+							var series = this.series[0];
+							setInterval(function() {
+								var x = (new Date()).getTime();
+								var y = getPrice(function(price) {
+									return price;									
+								});
+								series.addPoint([x, y], true, true);
+							}, 5000);
+						}
+					}
+				},
+				
+				rangeSelector: {
+					buttons: [{
+						count: 1,
+						type: 'minute',
+						text: '1M'
+					}, {
+						count: 5,
+						type: 'minute',
+						text: '5M'
+					}, {
+						type: 'all',
+						text: 'All'
+					}],
+					inputEnabled: false,
+					selected: 0
+				},
+				
+				title : {
+					text : /*[[${stockRecord.listedCompanyName}]]*/ 'Apple',
+				},
+				
+				exporting: {
+					enabled: false
+				},
+				
+				series : [{
+					name : /*[[${stockRecord.symbol}]]*/ 'AAPL',
+					data : (function() {
+						var data = [], time = (new Date()).getTime(), i;
+						var y = getPrice(function(price) {
+							return price;
+						});
+						
+						/*<![CDATA[*/
+						for( i = -999; i <= 0; i++) {
+							data.push([
+								time + i * 5000,
+								y
+							]);
+						}
+						/*]]>*/
+						
+						return data;
+					})()
+				}]
 			});
+			
+			function getPrice(fn) {
+				/*<![CDATA[*/
+				$.ajax({
+			        url: /*[['realTimeData.html?symbol=' + ${symbol}]]*/ 'http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?',
+			        dataType: "text",
+			        type: "GET",
+			        data: {},
+			        success: function (data) {
+			            fn(data);
+			        }
+			    });
+				/*]]>*/
+			}
 			
 			Highcharts.theme = {
 			   colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
@@ -381,11 +368,11 @@
 	
 	<div id="contentsHistoricalSymbolSearch">
 		<div id="taglineHistorical" class="clearfix">
-			<h1 th:text="#{historical.content.header}">Historical Stocks</h1>
+			<h1 th:text="#{realtime.content.header}">RealTime Stocks</h1>
 			<div>
 				<p>
 					<input type="text" id="symbol" name="symbol" class="message" value="TextValue" th:attr="value=${symbol}" />
-					<span><a id="quote" href="#" class="more" th:text="#{realtime.button.text}">Quote Button</a></span>
+					<span><a id="quote" href="#" class="more" th:text="#{historical.button.text}">Quote Button</a></span>
 				</p>
 			</div>
 			<div>
@@ -403,8 +390,7 @@
 	</div>
 	<div id="contentsHistorical">
 		<div id="taglineHistorical" class="clearfix">
-    		<div th:if="${#strings.isEmpty(symbol) == false}" id="basic-line-container" style="height: 500px; min-width: 500px"></div>
-    		<div th:if="${#strings.isEmpty(symbol) == false}" id="candlestick-volume-container" style="height: 500px; min-width: 500px"></div>
+    		<div th:if="${#strings.isEmpty(symbol) == false}" id="realtime-container" style="height: 500px; min-width: 500px"></div>    		
     	</div>
     </div>
     <div id="footer" th:include="templates :: footer"></div>

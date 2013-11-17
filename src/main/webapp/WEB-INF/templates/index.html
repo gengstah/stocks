@@ -3,18 +3,19 @@
 <head>
 	<title th:text="#{webapp.title}">Webapp ni Geng</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="/css/style.css" type="text/css" th:href="@{/css/style.css}" />
+	<link rel="icon" type="image/ico" href="../../images/favicon.ico" th:href="@{/images/favicon.ico}" />
+	<link rel="stylesheet" href="../../css/style.css" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
 	<div id="header" th:include="templates :: header"></div>
 	<div id="adbox">
 		<div class="clearfix">
-			<img src="images/cognoscenti.gif" alt="Img" height="342" width="368" th:attr="src=@{/images/cognoscenti.gif},title=#{company.name},alt=#{company.name}" />
+			<img src="../../images/cognoscenti.gif" alt="Img" height="342" width="368" th:attr="src=@{/images/cognoscenti.gif},title=#{company.name},alt=#{company.name}" />
 			<div>
 				<h1>Ideas?</h1>
 				<h2>That's what we live for.</h2>
 				<p>
-					Wix is an online website builder with a simple drag &amp; drop interface, meaning you do the work online and instantly publish to the web. <span><a href="index.html" class="btn">Try It Now!</a><b>Don't worry it's for free</b></span>
+					Wix is an online website builder with a simple drag &amp; drop interface, meaning you do the work online and instantly publish to the web. <span><a href="index.html" class="btn" th:href="@{/}">Try It Now!</a><b>Don't worry it's for free</b></span>
 				</p>
 			</div>
 		</div>

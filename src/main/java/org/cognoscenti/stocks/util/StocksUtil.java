@@ -88,4 +88,17 @@ public class StocksUtil {
 		return sb.toString();
 	}
 	
+	public String createRealTimeData(String symbol) {
+		
+		if("null".equals(symbol)) return "0";
+		
+		List<StockHistorySummary> records =  getSecuritiesAndIndicesForPublic();
+		
+		for(StockHistorySummary record : records) {
+			if(record.getSecuritySymbol().equalsIgnoreCase(symbol)) return record.getLastTradedPrice();
+		}
+		
+		return "0";
+	}
+	
 }
