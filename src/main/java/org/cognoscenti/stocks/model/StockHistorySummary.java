@@ -1,13 +1,19 @@
 package org.cognoscenti.stocks.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.cognoscenti.stocks.util.CustomJsonDoubleDeserializer;
+import org.cognoscenti.stocks.util.CustomJsonLongDeserializer;
 
 @Entity
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -26,16 +32,19 @@ public class StockHistorySummary {
 	private Long id;
 	
 	@JsonProperty("totalVolume")
-	private String totalVolume;
+	@JsonDeserialize(using = CustomJsonLongDeserializer.class)
+	private Long totalVolume;
 	
 	@JsonProperty("indicator")
 	private String indicator;
 	
 	@JsonProperty("percChangeClose")
-	private String percentChangeClose;
+	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
+	private Double percentChangeClose;
 	
 	@JsonProperty("lastTradedPrice")
-	private String lastTradedPrice;
+	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
+	private Double lastTradedPrice;
 	
 	@JsonProperty("securityAlias")
 	private String securityAlias;
@@ -45,7 +54,16 @@ public class StockHistorySummary {
 	
 	@JsonProperty("securitySymbol")
 	private String securitySymbol;
-
+	
+	private Date dateCreated;
+	
+	public StockHistorySummary() { }
+	
+	@PrePersist
+	public void prePersist() {
+		dateCreated = new Date();
+	}
+	
 	/**
 	 * @return the id
 	 */
@@ -61,12 +79,14 @@ public class StockHistorySummary {
 	}
 
 	@JsonProperty("totalVolume")
-	public String getTotalVolume() {
+	@JsonDeserialize(using = CustomJsonLongDeserializer.class)
+	public Long getTotalVolume() {
 		return totalVolume;
 	}
 
 	@JsonProperty("totalVolume")
-	public void setTotalVolume(String totalVolume) {
+	@JsonDeserialize(using = CustomJsonLongDeserializer.class)
+	public void setTotalVolume(Long totalVolume) {
 		this.totalVolume = totalVolume;
 	}
 
@@ -81,22 +101,26 @@ public class StockHistorySummary {
 	}
 
 	@JsonProperty("percChangeClose")
-	public String getPercentChangeClose() {
+	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
+	public Double getPercentChangeClose() {
 		return percentChangeClose;
 	}
 
 	@JsonProperty("percChangeClose")
-	public void setPercentChangeClose(String percentChangeClose) {
+	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
+	public void setPercentChangeClose(Double percentChangeClose) {
 		this.percentChangeClose = percentChangeClose;
 	}
 
 	@JsonProperty("lastTradedPrice")
-	public String getLastTradedPrice() {
+	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
+	public Double getLastTradedPrice() {
 		return lastTradedPrice;
 	}
 
 	@JsonProperty("lastTradedPrice")
-	public void setLastTradedPrice(String lastTradedPrice) {
+	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
+	public void setLastTradedPrice(Double lastTradedPrice) {
 		this.lastTradedPrice = lastTradedPrice;
 	}
 
@@ -128,6 +152,20 @@ public class StockHistorySummary {
 	@JsonProperty("securitySymbol")
 	public void setSecuritySymbol(String securitySymbol) {
 		this.securitySymbol = securitySymbol;
+	}
+
+	/**
+	 * @return the dateCreated
+	 */
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	/**
+	 * @param dateCreated the dateCreated to set
+	 */
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 	/* (non-Javadoc)

@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.cognoscenti.stocks.dao.StockHistorySummaryDataAccessObject;
+import org.cognoscenti.stocks.dao.impl.StockHistorySummaryDataAccessObjectImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -71,9 +73,9 @@ public class OrmConfig {
 		return transactionManager;
 	}
 	
-	/*@Bean
-	public TimesheetEntryDataAccessObject timesheetEntryDataAccessObject() {
-		return new TimesheetEntryDataAccessObjectImpl();
-	}*/
+	@Bean
+	public StockHistorySummaryDataAccessObject stockHistorySummaryDataAccessObject() {
+		return new StockHistorySummaryDataAccessObjectImpl();
+	}
 	
 }

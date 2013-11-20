@@ -27,7 +27,7 @@ public class HttpUtil {
 		String response = getResponse(connection);
 		connection.disconnect();
 		
-		return response;
+		return response.replaceFirst("\\{.+?\\},", "");
 	}
 	
 	public String findSecurityOrCompany(String symbol) {

@@ -34,7 +34,7 @@ public class RealTimeController {
 	
 	@RequestMapping(value = "/realTimeData", method = RequestMethod.GET)
 	public @ResponseBody String fetchRealTimeData(@RequestParam(value="symbol", required=false, defaultValue="BPI") String symbol) {		
-		return StocksUtil.getInstance().createRealTimeData(symbol);
+		return StocksUtil.getInstance().createRealTimeData(symbol).toString();
 	}
 	
 }

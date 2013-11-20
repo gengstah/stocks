@@ -16,4 +16,5 @@ public class HistoricalCompanyStockInfoRecordControllerTest {
 		
 		assertEquals(data, controller.fetchBasicLineData("101"));
 	}
+		
 }

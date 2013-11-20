@@ -88,9 +88,9 @@ public class StocksUtil {
 		return sb.toString();
 	}
 	
-	public String createRealTimeData(String symbol) {
+	public Double createRealTimeData(String symbol) {
 		
-		if("null".equals(symbol)) return "0";
+		if("null".equals(symbol)) return 0D;
 		
 		List<StockHistorySummary> records =  getSecuritiesAndIndicesForPublic();
 		
@@ -98,7 +98,7 @@ public class StocksUtil {
 			if(record.getSecuritySymbol().equalsIgnoreCase(symbol)) return record.getLastTradedPrice();
 		}
 		
-		return "0";
+		return 0D;
 	}
 	
 }

@@ -22,7 +22,8 @@ public class JsonUtil {
 	public static JsonUtil getInstance() {
 		return INSTANCE;
 	}
-
+	
+	@Deprecated
 	public <T> List<T> readValueFromUrlToList(String url, Class<T> clazz) {
 		try {
 			return OBJECT_MAPPER.readValue(

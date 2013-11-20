@@ -15,15 +15,7 @@ import org.junit.Test;
 public class JsonUtilTest {
 	
 	private final Logger logger = Logger.getLogger(getClass());
-	
-	@Test
-	public void testReadValueFromUrl() {
-		List<StockHistorySummary> stockRecords = JsonUtil.getInstance().readValueFromUrlToList(
-				"http://www.pse.com.ph/stockMarket/home.html?method=getSecuritiesAndIndicesForPublic&ajax=true", 
-				StockHistorySummary.class);
-		assertNotNull(stockRecords);
-	}
-	
+		
 	@Test
 	public void testReadValueFromJsonString() throws IOException {
 		
